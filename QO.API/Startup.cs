@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using QO.Application;
 using QO.Application.Config;
 using QO.Application.Interfaces;
 using QO.Infrastructure.Config;
@@ -28,12 +29,14 @@ namespace QO.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationServices();
+
             var qoRules = Configuration.GetSection("QualifyingOfferRules");
             services.Configure<QualifyingOfferConfig>(qoRules);
 
             var scraperConfig = Configuration.GetSection("Scraper");
             services.Configure<SalaryScraperConfig>(scraperConfig);
-            services.AddHttpClient<ISalaryScraper, SalaryScraper>(client => { client.BaseAddress = new Uri(scraperConfig["SalaryDataUrl"]); });
+            services.AddHttpClient<ISalaryScraper, SalaryScraper>(client => { client.BaseAddress = new Uri(scraperConfig["Url"]); });
 
             services.AddControllers();
         }

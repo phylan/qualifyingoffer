@@ -50,21 +50,23 @@ namespace QO.Infrastructure.Services
         private IEnumerable<Player> ParseSalaryHtml(HtmlDocument doc)
         {
             var rows = doc.DocumentNode
-                .SelectSingleNode($"//*[@id={_config.TableId}]")
+                .SelectSingleNode($"//*[@id=\"{_config.TableId}\"]")
                 .SelectNodes("//tr");
 
             List<Player> players = new List<Player>();
 
             foreach(var row in rows)
             {
-                var yearParsed = int.TryParse(row.SelectSingleNode($"//td[@class={_config.PlayerYearClass}]").InnerText, out var parsedYear);
+                var yearParsed = int.TryParse(row.SelectSingleNode($"td[@class=\"{_config.PlayerYearClass}\"]").InnerText, out var parsedYear);
 
-                players.Append(new Player
+                var name = row.SelectSingleNode($"td[@class=\"{_config.PlayerNameClass}\"]").InnerText;
+
+                players.Add(new Player
                 {
-                    Name = row.SelectSingleNode($"//td[@class={_config.PlayerNameClass}]").InnerText,
-                    RawSalary = row.SelectSingleNode($"//td[@class={_config.PlayerSalaryClass}]").InnerText,
+                    Name = row.SelectSingleNode($"td[@class=\"{_config.PlayerNameClass}\"]").InnerText,
+                    RawSalary = row.SelectSingleNode($"td[@class=\"{_config.PlayerSalaryClass}\"]").InnerText,
                     Year = yearParsed ? parsedYear : (int?)null,
-                    Level = row.SelectSingleNode($"//td[@class={_config.PlayerLevelClass}]").InnerText
+                    Level = row.SelectSingleNode($"td[@class=\"{_config.PlayerLevelClass}\"]").InnerText
                 });
             }
 

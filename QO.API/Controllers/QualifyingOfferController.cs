@@ -1,15 +1,17 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using QO.Application.Models;
 using QO.Application.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace QO.API.Controllers
 {
-    public class QualifyingOfferController : ApiController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class QualifyingOfferController
     {
         private readonly IMediator _mediator;
 
