@@ -59,8 +59,6 @@ namespace QO.Infrastructure.Services
             {
                 var yearParsed = int.TryParse(row.SelectSingleNode($"td[@class=\"{_config.PlayerYearClass}\"]").InnerText, out var parsedYear);
 
-                var name = row.SelectSingleNode($"td[@class=\"{_config.PlayerNameClass}\"]").InnerText;
-
                 players.Add(new Player
                 {
                     Name = row.SelectSingleNode($"td[@class=\"{_config.PlayerNameClass}\"]").InnerText,
