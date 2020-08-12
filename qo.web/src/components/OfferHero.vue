@@ -6,7 +6,7 @@
         </div>
       </div>
       <div class="shadow border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center">
-        <div class="text-6xl text-green-700">
+        <div class="text-6xl text-green-700" v-if="amount != null">
           {{ formattedAmount }}
         </div>
       </div>

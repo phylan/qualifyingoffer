@@ -18,13 +18,14 @@ export default {
   data() {
     return {
       amount: null,
-
+      includedPlayers: []
     }
   },
   async created() {
     try {
       let resp = await Api.qualifyingOffers.get()
       this.amount = resp.amount
+      this.includedPlayers = resp.includedPlayers
     }
     catch(err) {
       console.log(err)
