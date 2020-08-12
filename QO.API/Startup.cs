@@ -38,6 +38,8 @@ namespace QO.API
             services.Configure<SalaryScraperConfig>(scraperConfig);
             services.AddHttpClient<ISalaryScraper, SalaryScraper>(client => { client.BaseAddress = new Uri(scraperConfig["Url"]); });
 
+            services.AddOpenApiDocument(config => config.UseRouteNameAsOperationId = true);
+
             services.AddControllers();
         }
 
@@ -47,6 +49,8 @@ namespace QO.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseOpenApi();
 
             app.UseHttpsRedirection();
 
