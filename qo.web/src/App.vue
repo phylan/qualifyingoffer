@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class="min-h-screen flex items-center justify-center">
-    <OfferHero
-      :amount="amount"
-      />
+  <div id="app" class="container mx-auto items-center h-screen">
+    <div class="flex justify-center">
+      <OfferHero
+        :amount="amount"
+        />
+    </div>
   </div>
 </template>
 
