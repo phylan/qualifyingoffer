@@ -27,7 +27,7 @@ export default {
       this.amount = resp.amount
     }
     catch(err) {
-
+      console.log(err)
     }
   }
 }

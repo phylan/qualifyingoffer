@@ -7,46 +7,61 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+
 export class QualifyingOfferClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+    private instance: AxiosInstance;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
+    constructor(baseUrl?: string, instance?: AxiosInstance) {
+        this.instance = instance ? instance : axios.create();
         this.baseUrl = baseUrl ? baseUrl : "https://localhost:44310";
     }
 
-    get(): Promise<QualifyingOfferViewModel> {
+    get(  cancelToken?: CancelToken | undefined): Promise<QualifyingOfferViewModel> {
         let url_ = this.baseUrl + "/api/QualifyingOffer";
         url_ = url_.replace(/[?&]$/, "");
 
-        let options_ = <RequestInit>{
+        let options_ = <AxiosRequestConfig>{
             method: "GET",
+            url: url_,
             headers: {
                 "Accept": "application/json"
-            }
+            },
+            cancelToken
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
             return this.processGet(_response);
         });
     }
 
-    protected processGet(response: Response): Promise<QualifyingOfferViewModel> {
+    protected processGet(response: AxiosResponse): Promise<QualifyingOfferViewModel> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (let k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
         if (status === 200) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.data;
             let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            let resultData200  = _responseText;
             result200 = QualifyingOfferViewModel.fromJS(resultData200);
             return result200;
-            });
         } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.data;
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
         return Promise.resolve<QualifyingOfferViewModel>(<any>null);
     }
@@ -181,4 +196,8 @@ function throwException(message: string, status: number, response: string, heade
         throw result;
     else
         throw new ApiException(message, status, response, headers, null);
+}
+
+function isAxiosError(obj: any | undefined): obj is AxiosError {
+    return obj && obj.isAxiosError === true;
 }
