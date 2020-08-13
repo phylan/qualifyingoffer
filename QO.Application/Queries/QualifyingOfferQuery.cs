@@ -14,12 +14,12 @@ namespace QO.Application.Queries
     {
         public class Handler : IRequestHandler<QualifyingOfferQuery, QualifyingOfferViewModel>
         {
-            private readonly QualifyingOfferService _qoService;
+            private readonly QualifyingOfferServiceFactory _qoServiceFactory;
             private readonly ISalaryScraper _scraper;
 
-            public Handler(QualifyingOfferService qoService, ISalaryScraper scraper)
+            public Handler(QualifyingOfferServiceFactory qoServiceFactory, ISalaryScraper scraper)
             {
-                _qoService = qoService;
+                _qoServiceFactory = qoServiceFactory;
                 _scraper = scraper;
             }
 
@@ -27,10 +27,14 @@ namespace QO.Application.Queries
             {
                 var players = await _scraper.Scrape();
 
+                var qoService = _qoServiceFactory.Create(players);
+
                 return new QualifyingOfferViewModel
                 {
-                    IncludedPlayers = _qoService.SelectIncludedPlayers(players),
-                    Amount = _qoService.CalculateQualifyingOffer(players)
+                    IncludedPlayers = qoService.IncludedPlayers,
+                    ExcludedPlayers = qoService.ExcludedPlayers,
+                    Amount = qoService.Amount,
+                    TopQuantity = qoService.TopQuantity
                 };
             }
         }

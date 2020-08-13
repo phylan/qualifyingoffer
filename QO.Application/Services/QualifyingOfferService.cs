@@ -11,20 +11,25 @@ namespace QO.Application.Services
     public class QualifyingOfferService
     {
         private readonly QualifyingOfferConfig _config;
+        private readonly IList<Player> _players;
 
-        public QualifyingOfferService(IOptions<QualifyingOfferConfig> config)
+        public QualifyingOfferService(QualifyingOfferConfig config, IList<Player> players)
         {
-            _config = config.Value;
+            _config = config;
+            _players = players;
         }
 
-        public decimal CalculateQualifyingOffer(IList<Player> players)
-            => SelectIncludedPlayers(players).Select(p => p.Salary.Value).Average();
+        public decimal Amount => IncludedPlayers.Select(p => p.Salary.Value).Average();
 
-        public IList<Player> SelectIncludedPlayers(IList<Player> players) 
-            => players
+        public IList<Player> IncludedPlayers => _players
             .Where(p => p.Salary.HasValue)
             .OrderByDescending(p => p.Salary)
             .Take(_config.TopQuantity)
             .ToList();
+
+        public int TopQuantity => _config.TopQuantity;
+
+        public IList<Player> ExcludedPlayers => _players.Where(p => !p.Salary.HasValue).ToList();
+
     }
 }

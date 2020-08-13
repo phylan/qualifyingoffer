@@ -26,6 +26,7 @@ namespace QO.API
         }
 
         public IConfiguration Configuration { get; }
+        readonly string SpecificOriginsPolicy = "_allowSpecificOrigins";
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -38,6 +39,13 @@ namespace QO.API
             services.Configure<SalaryScraperConfig>(scraperConfig);
             services.AddHttpClient<ISalaryScraper, SalaryScraper>(client => { client.BaseAddress = new Uri(scraperConfig["Url"]); });
 
+            services.AddOpenApiDocument(config => config.UseRouteNameAsOperationId = true);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: SpecificOriginsPolicy, builder => { builder.WithOrigins("http://localhost:8080"); });
+            });
+
             services.AddControllers();
         }
 
@@ -48,9 +56,13 @@ namespace QO.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseOpenApi();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(SpecificOriginsPolicy);
 
             app.UseAuthorization();
 

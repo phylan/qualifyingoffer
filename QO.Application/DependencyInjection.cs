@@ -13,7 +13,7 @@ namespace QO.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddScoped<QualifyingOfferService>();
+            services.AddScoped<QualifyingOfferServiceFactory>();
 
             return services;
         }
