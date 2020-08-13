@@ -1,15 +1,15 @@
 <template>
       <div>
         <div class="border border-gray-800 bg-gray-800 rounded-t px-10 py-2 text-center">
-          <div class="text-3xl sm:text-4xl text-white font-light">
+          <div class="text-3xl sm:text-4xl text-white font-light tracking-wider uppercase">
             2016 Qualifying Offer
           </div>
         </div>
-        <div class="shadow-md border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center" v-if="amount != null">
-          <div class="text-4xl sm:text-6xl text-green-700 hidden sm:block">
+        <div class="shadow-md border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center">
+          <div class="text-4xl sm:text-6xl text-green-700 hidden sm:block" v-show="amount != null">
             {{ formattedAmount }}
           </div>
-          <div class="text-4xl sm:text-6xl text-green-700 sm:hidden">
+          <div class="text-4xl sm:text-6xl text-green-700 sm:hidden" v-show="amount != null">
             {{ smallAmount }}
           </div>
         </div>
