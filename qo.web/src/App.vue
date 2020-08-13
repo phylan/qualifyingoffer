@@ -2,11 +2,11 @@
   <div id="app" class="mt-20 h-screen">
     <div class="flex justify-center" v-if="showDetails">
       <PlayerList
-        :players="includedPlayers"/>
+        v-bind="qualifyingOfferInfo"/>
     </div>
     <div class="flex justify-center">
       <OfferHero
-        :amount="amount"
+        :amount="qualifyingOfferInfo.amount"
         />
     </div>
     <div class="flex justify-center">
@@ -32,16 +32,19 @@ export default {
   },
   data() {
     return {
-      amount: null,
-      includedPlayers: [],
+      qualifyingOfferInfo: {
+        amount: null,
+        topQuantity: null,
+        includedPlayers: [],
+        excludedPlayers: []
+      },
       showDetails: false
     }
   },
   async created() {
     try {
       let resp = await Api.qualifyingOffers.get()
-      this.amount = resp.amount
-      this.includedPlayers = resp.includedPlayers
+      this.qualifyingOfferInfo = { ...resp }
     }
     catch(err) {
       console.log(err)

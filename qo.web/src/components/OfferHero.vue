@@ -2,7 +2,7 @@
       <div>
         <div class="border border-gray-800 bg-gray-800 rounded-t px-10 py-2 text-center">
           <div class="text-3xl sm:text-4xl text-white font-light tracking-wider uppercase">
-            2016 Qualifying Offer
+            2017 Qualifying Offer
           </div>
         </div>
         <div class="shadow-md border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center">
