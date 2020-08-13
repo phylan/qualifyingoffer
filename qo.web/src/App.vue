@@ -1,20 +1,25 @@
 <template>
   <div id="app" class="pt-10 h-screen bg-gray-200">
-    <div class="justify-center" v-if="showDetails">
-      <PlayerList
-        v-bind="qualifyingOfferInfo" />
+    <div v-if="!apiError">
+      <div class="justify-center" v-if="showDetails">
+        <PlayerList
+          v-bind="qualifyingOfferInfo" />
+      </div>
+      <div class="flex justify-center">
+        <OfferHero
+          :amount="qualifyingOfferInfo.amount"
+          />
+      </div>
+      <div class="flex justify-center">
+        <button 
+          class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3 z-50"
+          @click="() => showDetails = !showDetails">
+          <div class="text-white uppercase tracking-widest">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
+        </button>
+      </div>
     </div>
-    <div class="flex justify-center">
-      <OfferHero
-        :amount="qualifyingOfferInfo.amount"
-        />
-    </div>
-    <div class="flex justify-center">
-      <button 
-        class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3 z-50"
-        @click="() => showDetails = !showDetails">
-        <div class="text-white uppercase tracking-widest">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
-      </button>
+    <div v-else class="p-20 flex items-center justify-center">
+       <h1 class="text-3xl font-light text-maroon">An error was encountered while attempting to load salary data. Please try again later.</h1>
     </div>
   </div>
 </template>
@@ -38,7 +43,8 @@ export default {
         includedPlayers: [],
         excludedPlayers: []
       },
-      showDetails: false
+      showDetails: false,
+      apiError: false
     }
   },
   async created() {
@@ -48,6 +54,7 @@ export default {
     }
     catch(err) {
       console.log(err)
+      this.apiError = true
     }
   }
 }
