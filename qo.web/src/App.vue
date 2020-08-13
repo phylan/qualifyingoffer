@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="pt-10 h-screen bg-gray-200">
-    <div class="justify-center h-full flex flex-col flex-shrink" v-if="showDetails">
+    <div class="justify-center" v-if="showDetails">
       <PlayerList
         v-bind="qualifyingOfferInfo" />
     </div>
