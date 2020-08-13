@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="mt-20 h-screen">
-    <div class="flex justify-center" v-if="showDetails">
+  <div id="app" class="pt-10 h-screen bg-gray-200">
+    <div class="flex h-64 justify-center" v-if="showDetails">
       <PlayerList
         v-bind="qualifyingOfferInfo"/>
     </div>
@@ -11,7 +11,7 @@
     </div>
     <div class="flex justify-center">
       <button 
-        class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3"
+        class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3 z-50"
         @click="() => showDetails = !showDetails">
         <div class="text-white uppercase tracking-widest">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
       </button>
