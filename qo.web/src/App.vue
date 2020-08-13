@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container mx-auto items-center h-screen">
+  <div id="app" class="mt-20 h-screen">
     <div class="flex justify-center">
       <OfferHero
         :amount="amount"

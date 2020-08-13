@@ -1,19 +1,19 @@
 <template>
-    <div class="flex-col">
-      <div class="border border-gray-800 bg-gray-800 rounded-t px-10 py-2 text-center">
-        <div class="text-3xl sm:text-4xl text-white font-light">
-          2016 Qualifying Offer
+      <div>
+        <div class="border border-gray-800 bg-gray-800 rounded-t px-10 py-2 text-center">
+          <div class="text-3xl sm:text-4xl text-white font-light">
+            2016 Qualifying Offer
+          </div>
+        </div>
+        <div class="shadow-md border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center" v-if="amount != null">
+          <div class="text-4xl sm:text-6xl text-green-700 hidden sm:block">
+            {{ formattedAmount }}
+          </div>
+          <div class="text-4xl sm:text-6xl text-green-700 sm:hidden">
+            {{ smallAmount }}
+          </div>
         </div>
       </div>
-      <div class="shadow border-r border-l border-b border-gray-800 rounded-b px-10 py-2 text-center" v-if="amount != null">
-        <div class="text-4xl sm:text-6xl text-green-700 hidden sm:block">
-          {{ formattedAmount }}
-        </div>
-        <div class="text-4xl sm:text-6xl text-green-700 sm:hidden">
-          {{ smallAmount }}
-        </div>
-      </div>
-    </div>
 </template>
 
 <script>
