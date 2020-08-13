@@ -43,7 +43,9 @@ namespace QO.API
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: SpecificOriginsPolicy, builder => { builder.WithOrigins("http://localhost:8080"); });
+                options.AddPolicy(name: SpecificOriginsPolicy, builder => { 
+                    builder.WithOrigins("http://localhost:8080",
+                    "https://qualifyingoffer.onrender.com"); });
             });
 
             services.AddControllers();
