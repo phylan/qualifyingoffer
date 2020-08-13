@@ -5,7 +5,7 @@
             2017 Qualifying Offer
           </div>
         </div>
-        <div class="shadow-lg border-r border-l border-b border-gray-800 rounded-b bg-white px-10 py-2 text-center">
+        <div class="shadow-lg border-r border-l border-b border-gray-800 rounded-b bg-white px-10 py-2 text-center h-sm-32">
           <div class="text-4xl sm:text-6xl text-green-700 hidden sm:block" v-show="amount != null">
             {{ formattedAmount }}
           </div>
