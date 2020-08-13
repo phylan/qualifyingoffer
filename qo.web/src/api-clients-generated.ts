@@ -69,7 +69,9 @@ export class QualifyingOfferClient {
 
 export class QualifyingOfferViewModel implements IQualifyingOfferViewModel {
     amount?: number;
+    topQuantity?: number;
     includedPlayers?: Player[] | undefined;
+    excludedPlayers?: Player[] | undefined;
 
     constructor(data?: IQualifyingOfferViewModel) {
         if (data) {
@@ -83,10 +85,16 @@ export class QualifyingOfferViewModel implements IQualifyingOfferViewModel {
     init(_data?: any) {
         if (_data) {
             this.amount = _data["amount"];
+            this.topQuantity = _data["topQuantity"];
             if (Array.isArray(_data["includedPlayers"])) {
                 this.includedPlayers = [] as any;
                 for (let item of _data["includedPlayers"])
                     this.includedPlayers!.push(Player.fromJS(item));
+            }
+            if (Array.isArray(_data["excludedPlayers"])) {
+                this.excludedPlayers = [] as any;
+                for (let item of _data["excludedPlayers"])
+                    this.excludedPlayers!.push(Player.fromJS(item));
             }
         }
     }
@@ -101,10 +109,16 @@ export class QualifyingOfferViewModel implements IQualifyingOfferViewModel {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["amount"] = this.amount;
+        data["topQuantity"] = this.topQuantity;
         if (Array.isArray(this.includedPlayers)) {
             data["includedPlayers"] = [];
             for (let item of this.includedPlayers)
                 data["includedPlayers"].push(item.toJSON());
+        }
+        if (Array.isArray(this.excludedPlayers)) {
+            data["excludedPlayers"] = [];
+            for (let item of this.excludedPlayers)
+                data["excludedPlayers"].push(item.toJSON());
         }
         return data; 
     }
@@ -112,7 +126,9 @@ export class QualifyingOfferViewModel implements IQualifyingOfferViewModel {
 
 export interface IQualifyingOfferViewModel {
     amount?: number;
+    topQuantity?: number;
     includedPlayers?: Player[] | undefined;
+    excludedPlayers?: Player[] | undefined;
 }
 
 export class Player implements IPlayer {
