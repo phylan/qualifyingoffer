@@ -14,7 +14,7 @@
         <button 
           class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3 z-50"
           @click="() => showDetails = !showDetails">
-          <div class="text-white uppercase tracking-widest">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
+          <div class="text-white uppercase font-light">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
         </button>
       </div>
     </div>
