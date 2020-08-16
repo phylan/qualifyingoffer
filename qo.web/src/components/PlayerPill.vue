@@ -1,13 +1,8 @@
 <template>
-        <div class="p-3">
-            <div class="text-maroon uppercase tracking-wide">{{rank}}. {{ player.name }}</div>
-            <div class="text-green-700" v-if="hasSalaryData">
-                {{ formattedSalary }}
-            </div>
-            <div class="text-gray-700 italic" v-else>
-                No salary data available
-            </div>
-        </div>
+    <v-list-item >
+      <v-list-item-title class="primary--text text-md-h5 text-sm-h6">{{ rank }}. {{ player.name }}</v-list-item-title>
+      <v-list-item-subtitle v-text="formattedSalary" class="text-md-h5 text-sm-h6 accent--text"></v-list-item-subtitle>
+    </v-list-item>
 </template>
 
 <script>
