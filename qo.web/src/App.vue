@@ -1,27 +1,58 @@
 <template>
-  <div id="app" class="pt-10 h-screen bg-gray-200">
-    <div v-if="!apiError">
-      <div class="justify-center" v-if="showDetails">
-        <PlayerList
-          v-bind="qualifyingOfferInfo" />
-      </div>
-      <div class="flex justify-center">
-        <OfferHero
-          :amount="qualifyingOfferInfo.amount"
-          />
-      </div>
-      <div class="flex justify-center">
-        <button 
-          class="rounded-lg px-2 bg-maroon hover:bg-maroon-lighter -mt-3 z-50"
-          @click="() => showDetails = !showDetails">
-          <div class="text-white uppercase font-light">{{ showDetails ? 'Hide' : 'Show' }} Details</div>
-        </button>
-      </div>
-    </div>
-    <div v-else class="p-20 flex items-center justify-center">
-       <h1 class="text-3xl font-light text-maroon">An error was encountered while attempting to load salary data. Please try again later.</h1>
-    </div>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <v-toolbar-title class="text-h4 text-uppercase white--text font-weight-light">
+        <v-icon class="white--text mb-1" large>fas fa-file-signature</v-icon>
+        <span class="d-none ml-2 d-sm-inline">Qualifying Offer</span>
+        <span class="d-sm-none ml-2">QO</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <a href="https://github.com/phylan" target="_blank" class="mr-5">
+        <v-icon class="white--text mr-2">fab fa-github</v-icon>
+        <span class="white--text d-none d-md-inline">Phylan</span>
+      </a>
+      <a href="https://linkedin.com/in/RyanMSommers" target="_blank">
+        <v-icon class="white--text mr-2">fab fa-linkedin</v-icon>
+        <span class="white--text d-none d-md-inline">Ryan Sommers</span>
+      </a>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <v-row justify="space-around">
+          <v-col cols="auto">
+            <OfferHero :amount="qualifyingOfferInfo.amount"/>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col cols="12" lg="10">
+            <PlayerList 
+              :includedPlayers="qualifyingOfferInfo.includedPlayers"
+              :excludedPlayers="qualifyingOfferInfo.excludedPlayers"
+              :topQuantity="qualifyingOfferInfo.topQuantity"/>
+          </v-col>
+        </v-row>
+        <v-snackbar bottom color="error" dark :value="apiError">
+          An error occurred while loading salary data. Please refresh to try again. 
+
+          <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="apiError = false"
+          >
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-container>
+    </v-main>
+
+    <v-footer app>
+
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
@@ -34,7 +65,7 @@ export default {
   components: {
     OfferHero,
     PlayerList
-  },
+},
   data() {
     return {
       qualifyingOfferInfo: {
@@ -59,5 +90,3 @@ export default {
   }
 }
 </script>
-
-<style src="./assets/tailwind.css">
