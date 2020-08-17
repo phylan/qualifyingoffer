@@ -1,6 +1,8 @@
 # qualifyingoffer
 Questionnaire response application
 
+*Note: In the interest of full transparency, after I originally submitted this I spent about about an hour and a half swapping out the utility-based CSS library I had originally used, upon realizing its responsivness in production was not satisfactory. I replaced it with a material design library called Vuetify. The changes can be reviewed in the pull request entitled "UI Library Replacement"*
+
 ## Live Version
 To view a live version proceed to https://qualifyingoffer.onrender.com
 
@@ -22,4 +24,5 @@ To view a live version proceed to https://qualifyingoffer.onrender.com
   2. Mediator pattern implementation with [MediatR](https://github.com/jbogard/MediatR)
   3. Open API document generation with [NSwag](https://github.com/RicoSuter/NSwag)
   4. Typescript client generation with [NSwag Studio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)
-  5. Utility-based CSS with [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+  ~~5. Utility-based CSS with [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)~~
+  5. Material design framework by [Vuetify](https://vuetifyjs.com)
