@@ -26,3 +26,4 @@ To view a live version proceed to https://qualifyingoffer.onrender.com
   4. Typescript client generation with [NSwag Studio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)
   ~~5. Utility-based CSS with [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)~~
   5. Material design framework by [Vuetify](https://vuetifyjs.com)
+  6. Icons from [Font Awesome](https://fontawesome.com/icons?d=gallery)
