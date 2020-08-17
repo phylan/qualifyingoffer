@@ -1,7 +1,9 @@
 <template>
     <v-list-item >
       <v-list-item-title class="primary--text text-md-h5 text-sm-h6">{{ rank }}. {{ player.name }}</v-list-item-title>
-      <v-list-item-subtitle v-text="formattedSalary" class="text-md-h5 text-sm-h6 accent--text"></v-list-item-subtitle>
+      <div class="d-block d-sm-inline">
+          <v-list-item-subtitle v-text="formattedSalary" class="text-md-h5 text-sm-h6 secondary--text"></v-list-item-subtitle>
+      </div>
     </v-list-item>
 </template>
 

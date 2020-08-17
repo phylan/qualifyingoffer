@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels hover multiple popout>
+  <v-expansion-panels hover multiple popout :value="[0]">
     <v-expansion-panel>
       <v-expansion-panel-header class="text-h5 info white--text font-weight-light">
         <span>
@@ -7,7 +7,7 @@
           Calculation Details
         </span>
         </v-expansion-panel-header>
-      <v-expansion-panel-content class="info--text pt-6">
+      <v-expansion-panel-content class="secondary--text pt-6">
         The qualifying offer is a one-year contract, the value of which is calculated by averaging the highest {{ topQuantity }} player salaries from the prior season.
         {{ excludedPlayers.length }} players could not be considered in this calculation due to missing salary data for the previous season.
       </v-expansion-panel-content>
